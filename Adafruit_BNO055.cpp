@@ -78,6 +78,12 @@ bool Adafruit_BNO055::begin(adafruit_bno055_opmode_t mode)
 
   /* Reset */
   write8(BNO055_SYS_TRIGGER_ADDR, 0x20);
+  /*
+   * This delay has been added to fix a problem resulting that the sensors
+   * is not always detected, with this delay, the sensors are alwas detected.
+   * REF : https://forums.adafruit.com/viewtopic.php?f=19&t=92153&start=15#wrap 
+   */
+  delay(30); // ADDED RB
   while (read8(BNO055_CHIP_ID_ADDR) != BNO055_ID)
   {
     delay(10);
